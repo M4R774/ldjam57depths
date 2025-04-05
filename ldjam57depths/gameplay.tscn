@@ -1,136 +1,28 @@
-[gd_scene load_steps=16 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=14 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay.gd" id="1_fbudy"]
-[ext_resource type="Texture2D" uid="uid://dqsjoxgpuogta" path="res://tree.png" id="1_n4psk"]
+[ext_resource type="Shader" uid="uid://cmxhcgk5fuoi4" path="res://blur.gdshader" id="1_smepj"]
 [ext_resource type="Script" uid="uid://stwto1mhsd2a" path="res://depth_of_field.gd" id="2_oe8ih"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://focus_slider.gd" id="3_xuee5"]
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://focus_in.mp3" id="4_smepj"]
 [ext_resource type="AudioStream" uid="uid://by7rxaey8vv84" path="res://focus_out.mp3" id="5_cbffv"]
 [ext_resource type="Script" uid="uid://diey36ouvgd6r" path="res://help.gd" id="6_0m7cd"]
+[ext_resource type="Texture2D" uid="uid://beg8ywl1a86bk" path="res://small_lens.png" id="9_1qy1k"]
+[ext_resource type="Texture2D" uid="uid://mo3ehv2wyrit" path="res://big_lens.png" id="10_3n40r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(1742, 864)
 
-[sub_resource type="Shader" id="Shader_xuee5"]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy1k"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 32.0
+shader_parameter/sample_count = 16
 
-uniform int strength: hint_range(1, 512) = 2;
-
-vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
-    
-    vec4 color = vec4(0.,0.,0.,0.);
-    float strengthFloat = float(strength);	
-
-    vec2 pixel = fragCoord/pixelSize;
-    int x_min = max(int(pixel.x-strengthFloat), 0);
-    int x_max = min(int(pixel.x+strengthFloat), int(1./pixelSize.x));
-    int y_min = max(int(pixel.y-strengthFloat), 0);
-    int y_max = min(int(pixel.y+strengthFloat), int(1./pixelSize.y));
-
-    int count =0;
-
-    // Sum the pixels colors
-    for(int x=x_min; x <= x_max; x++) {
-        for(int y = y_min; y <= y_max; y++) {           
-            color += texture(tex, vec2(float(x), float(y)) * pixelSize);
-            count++;
-        }
-    }
-    
-    // Divide the color by the number of colors you summed up
-    color /= float(count);
-    
-    return color;
-}
-
-void fragment() {	
-    COLOR = blur_size(TEXTURE,UV,TEXTURE_PIXEL_SIZE);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_smepj"]
-shader = SubResource("Shader_xuee5")
-shader_parameter/strength = 2
-
-[sub_resource type="Shader" id="Shader_cbffv"]
-code = "shader_type canvas_item;
-
-uniform int strength: hint_range(1, 512) = 2;
-
-vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
-    
-    vec4 color = vec4(0.,0.,0.,0.);
-    float strengthFloat = float(strength);	
-
-    vec2 pixel = fragCoord/pixelSize;
-    int x_min = max(int(pixel.x-strengthFloat), 0);
-    int x_max = min(int(pixel.x+strengthFloat), int(1./pixelSize.x));
-    int y_min = max(int(pixel.y-strengthFloat), 0);
-    int y_max = min(int(pixel.y+strengthFloat), int(1./pixelSize.y));
-
-    int count =0;
-
-    // Sum the pixels colors
-    for(int x=x_min; x <= x_max; x++) {
-        for(int y = y_min; y <= y_max; y++) {           
-            color += texture(tex, vec2(float(x), float(y)) * pixelSize);
-            count++;
-        }
-    }
-    
-    // Divide the color by the number of colors you summed up
-    color /= float(count);
-    
-    return color;
-}
-
-void fragment() {	
-    COLOR = blur_size(TEXTURE,UV,TEXTURE_PIXEL_SIZE);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbudy"]
-shader = SubResource("Shader_cbffv")
-shader_parameter/strength = 2
-
-[sub_resource type="Shader" id="Shader_0m7cd"]
-code = "shader_type canvas_item;
-
-uniform int strength: hint_range(1, 512) = 2;
-
-vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
-    
-    vec4 color = vec4(0.,0.,0.,0.);
-    float strengthFloat = float(strength);	
-
-    vec2 pixel = fragCoord/pixelSize;
-    int x_min = max(int(pixel.x-strengthFloat), 0);
-    int x_max = min(int(pixel.x+strengthFloat), int(1./pixelSize.x));
-    int y_min = max(int(pixel.y-strengthFloat), 0);
-    int y_max = min(int(pixel.y+strengthFloat), int(1./pixelSize.y));
-
-    int count =0;
-
-    // Sum the pixels colors
-    for(int x=x_min; x <= x_max; x++) {
-        for(int y = y_min; y <= y_max; y++) {           
-            color += texture(tex, vec2(float(x), float(y)) * pixelSize);
-            count++;
-        }
-    }
-    
-    // Divide the color by the number of colors you summed up
-    color /= float(count);
-    
-    return color;
-}
-
-void fragment() {	
-    COLOR = blur_size(TEXTURE,UV,TEXTURE_PIXEL_SIZE);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ihbs"]
-shader = SubResource("Shader_0m7cd")
-shader_parameter/strength = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3n40r"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 32.0
+shader_parameter/sample_count = 16
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fbudy")
@@ -179,76 +71,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 29
 text = "Scrollwheel for Zoom + Focus"
 horizontal_alignment = 1
 script = ExtResource("6_0m7cd")
+metadata/_edit_use_anchors_ = true
 
-[node name="Forest" type="Node" parent="."]
-
-[node name="TreeMid" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_smepj")
-position = Vector2(611, 236)
-scale = Vector2(14.25, 14.25)
-texture = ExtResource("1_n4psk")
+[node name="SmallLens" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_1qy1k")
+position = Vector2(770.75, 244.25)
+scale = Vector2(0.284635, 0.284635)
+texture = ExtResource("9_1qy1k")
 script = ExtResource("2_oe8ih")
-distance_from_camera = 50.0
+distance_from_camera = 10.0
 
-[node name="TreeFar" type="Sprite2D" parent="Forest"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_fbudy")
-position = Vector2(274, 135)
-scale = Vector2(8, 8)
-texture = ExtResource("1_n4psk")
+[node name="BigLens" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_3n40r")
+position = Vector2(1308, 232)
+scale = Vector2(0.168001, 0.168001)
+texture = ExtResource("10_3n40r")
 script = ExtResource("2_oe8ih")
-distance_from_camera = 80.0
-
-[node name="TreeSemiClose" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_2ihbs")
-position = Vector2(391, 205)
-scale = Vector2(19.5791, 19.5791)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 30.0
-
-[node name="TreeClose" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_2ihbs")
-position = Vector2(907, 215)
-scale = Vector2(23.1875, 23.1875)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 20.0
-
-[node name="TreeMid2" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_smepj")
-position = Vector2(1314, 236)
-scale = Vector2(14.25, 14.25)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 50.0
-
-[node name="TreeFar2" type="Sprite2D" parent="Forest"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_fbudy")
-position = Vector2(977, 135)
-scale = Vector2(8, 8)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 80.0
-
-[node name="TreeSemiClose2" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_2ihbs")
-position = Vector2(1094, 205)
-scale = Vector2(19.5791, 19.5791)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 30.0
-
-[node name="TreeClose2" type="Sprite2D" parent="Forest"]
-material = SubResource("ShaderMaterial_2ihbs")
-position = Vector2(1610, 215)
-scale = Vector2(23.1875, 23.1875)
-texture = ExtResource("1_n4psk")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 20.0
+distance_from_camera = 60.0
 
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]

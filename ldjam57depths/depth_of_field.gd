@@ -4,11 +4,10 @@ extends Sprite2D
 
 
 func _ready():
-    SIGNAL_BUS.focus_changed.connect(focus_changed)
-    z_index = -distance_from_camera
+	SIGNAL_BUS.focus_changed.connect(focus_changed)
+	z_index = -distance_from_camera
 
 
 func focus_changed(new_focus_distance):
-    var strength = abs(distance_from_camera - new_focus_distance)/10
-    material.set_shader_parameter("strength", strength)
-    # TODO: Blur image
+	var strength = clamp(((abs(distance_from_camera - new_focus_distance) - 5) / transform.get_scale().x), 0, 800) 
+	material.set_shader_parameter("strength", strength)

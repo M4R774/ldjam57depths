@@ -1,0 +1,1 @@
+ALL ART MUST BE 1920x1920px!!!

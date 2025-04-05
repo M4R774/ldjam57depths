@@ -1,34 +1,29 @@
 shader_type canvas_item;
 
-uniform int strength: hint_range(1, 512) = 2;
+uniform float strength : hint_range(1, 512) = 32;
+uniform int sample_count : hint_range(1, 64) = 100;
 
-vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
-    
-    vec4 color = vec4(0.,0.,0.,0.);
-    float strengthFloat = float(strength);	
-
-    vec2 pixel = fragCoord/pixelSize;
-    int x_min = max(int(pixel.x-strengthFloat), 0);
-    int x_max = min(int(pixel.x+strengthFloat), int(1./pixelSize.x));
-    int y_min = max(int(pixel.y-strengthFloat), 0);
-    int y_max = min(int(pixel.y+strengthFloat), int(1./pixelSize.y));
-
-    int count =0;
-
-    // Sum the pixels colors
-    for(int x=x_min; x <= x_max; x++) {
-        for(int y = y_min; y <= y_max; y++) {           
-            color += texture(tex, vec2(float(x), float(y)) * pixelSize);
-            count++;
-        }
-    }
-    
-    // Divide the color by the number of colors you summed up
-    color /= float(count);
-    
-    return color;
+// Pseudo-random number generator
+float rand(vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-void fragment() {	
-    COLOR = blur_size(TEXTURE,UV,TEXTURE_PIXEL_SIZE);
+vec4 blur_random(sampler2D tex, vec2 uv, vec2 pixelSize) {
+    vec4 color = vec4(0.0);
+
+    float time_offset = TIME * 0.1; // Control how fast blur randomness changes
+
+    for (int i = 0; i < sample_count; i++) {
+        float x = rand(uv + float(i) + time_offset) - 0.5;
+        float y = rand(uv + float(i) + 1.2345 + time_offset) - 0.5;
+        vec2 offset = vec2(x, y) * strength * pixelSize;
+        color += texture(tex, uv + offset);
+    }
+
+    return color / float(sample_count);
+}
+
+void fragment() {
+    COLOR = blur_random(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 }
