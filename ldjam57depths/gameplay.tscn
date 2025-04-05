@@ -1,27 +1,43 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=22 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay.gd" id="1_fbudy"]
 [ext_resource type="Shader" uid="uid://cmxhcgk5fuoi4" path="res://blur.gdshader" id="1_smepj"]
 [ext_resource type="Script" uid="uid://stwto1mhsd2a" path="res://depth_of_field.gd" id="2_oe8ih"]
+[ext_resource type="Material" uid="uid://cedu04821amrq" path="res://blur.tres" id="3_smepj"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://focus_slider.gd" id="3_xuee5"]
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://focus_in.mp3" id="4_smepj"]
 [ext_resource type="AudioStream" uid="uid://by7rxaey8vv84" path="res://focus_out.mp3" id="5_cbffv"]
 [ext_resource type="Script" uid="uid://diey36ouvgd6r" path="res://help.gd" id="6_0m7cd"]
+[ext_resource type="Texture2D" uid="uid://px7p5pflysc3" path="res://camera_overlay.png" id="7_x2ust"]
 [ext_resource type="Texture2D" uid="uid://beg8ywl1a86bk" path="res://small_lens.png" id="9_1qy1k"]
 [ext_resource type="Texture2D" uid="uid://mo3ehv2wyrit" path="res://big_lens.png" id="10_3n40r"]
+[ext_resource type="Texture2D" uid="uid://bxy4nkboylfu5" path="res://hill.png" id="10_eod45"]
+[ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://wallpaper.jpg" id="11_3n40r"]
+[ext_resource type="Script" uid="uid://ce4nnoop6jkk4" path="res://small_lens.gd" id="11_45aep"]
+[ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://grass.png" id="14_eod45"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
-size = Vector2(1742, 864)
+size = Vector2(2006, 1070)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy1k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_45aep"]
 shader = ExtResource("1_smepj")
-shader_parameter/strength = 32.0
+shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3n40r"]
 shader = ExtResource("1_smepj")
-shader_parameter/strength = 32.0
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyrfw"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy1k"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
 [node name="Node2D" type="Node2D"]
@@ -30,12 +46,13 @@ script = ExtResource("1_fbudy")
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
 position = Vector2(1004, 265)
 script = ExtResource("1_cbffv")
+max_zoom = 20.0
 game_area = NodePath("PlayArea")
 
 [node name="PlayArea" type="Area2D" parent="Camera"]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Camera/PlayArea"]
-position = Vector2(-4, -59)
+position = Vector2(8, -33)
 shape = SubResource("RectangleShape2D_smepj")
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -49,6 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="HSlider" type="HSlider" parent="HUD/Control"]
@@ -77,22 +95,88 @@ horizontal_alignment = 1
 script = ExtResource("6_0m7cd")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_x2ust")
+
+[node name="Wallpaper" type="Sprite2D" parent="."]
+z_index = -100
+material = SubResource("ShaderMaterial_45aep")
+position = Vector2(1009, 340)
+scale = Vector2(1.82933, 1.82933)
+texture = ExtResource("11_3n40r")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 100.0
+
+[node name="Hill" type="Sprite2D" parent="."]
+z_index = -10
+material = ExtResource("3_smepj")
+position = Vector2(1441, 251)
+texture = ExtResource("10_eod45")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 90.0
+
+[node name="BigLens" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_3n40r")
+position = Vector2(905.576, 408.84)
+rotation = 0.916298
+scale = Vector2(0.098, 0.098)
+texture = ExtResource("10_3n40r")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 80.0
+
+[node name="Button" type="Button" parent="BigLens"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -339.0
+offset_right = -1724.0
+offset_bottom = -1593.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+script = ExtResource("11_45aep")
+
+[node name="Grass" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tyrfw")
+position = Vector2(1110, 821)
+texture = ExtResource("14_eod45")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 11.0
+
 [node name="SmallLens" type="Sprite2D" parent="."]
 z_index = 10
 material = SubResource("ShaderMaterial_1qy1k")
-position = Vector2(770.75, 244.25)
+position = Vector2(289, 664)
+rotation = -1.33518
 scale = Vector2(0.284635, 0.284635)
 texture = ExtResource("9_1qy1k")
 script = ExtResource("2_oe8ih")
 distance_from_camera = 10.0
 
-[node name="BigLens" type="Sprite2D" parent="."]
-z_index = 10
-material = SubResource("ShaderMaterial_3n40r")
-position = Vector2(1308, 232)
-scale = Vector2(0.168001, 0.168001)
-texture = ExtResource("10_3n40r")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 60.0
+[node name="Button" type="Button" parent="SmallLens"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -168.929
+offset_top = -248.426
+offset_right = -1733.93
+offset_bottom = -1666.43
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+script = ExtResource("11_45aep")
 
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]
+[connection signal="pressed" from="BigLens/Button" to="BigLens/Button" method="_on_pressed"]
+[connection signal="pressed" from="SmallLens/Button" to="SmallLens/Button" method="_on_pressed"]

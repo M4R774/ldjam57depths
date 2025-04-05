@@ -9,5 +9,5 @@ func _ready():
 
 
 func focus_changed(new_focus_distance):
-	var strength = clamp(((abs(distance_from_camera - new_focus_distance) - 5) / transform.get_scale().x), 0, 800) 
+	var strength = abs(clamp(((abs(distance_from_camera - new_focus_distance) - 5) / transform.get_scale().x), 0, 800))*2
 	material.set_shader_parameter("strength", strength)

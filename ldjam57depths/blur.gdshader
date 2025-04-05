@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float strength : hint_range(1, 512) = 32;
+uniform float strength : hint_range(1, 512) = 0;
 uniform int sample_count : hint_range(1, 64) = 100;
 
 // Pseudo-random number generator

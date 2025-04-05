@@ -4,5 +4,5 @@
 
 [resource]
 shader = ExtResource("1_fc23q")
-shader_parameter/strength = 32.0
+shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
