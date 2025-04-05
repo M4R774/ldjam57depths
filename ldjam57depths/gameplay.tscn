@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=27 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay.gd" id="1_fbudy"]
@@ -9,10 +9,15 @@
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://focus_in.mp3" id="4_smepj"]
 [ext_resource type="AudioStream" uid="uid://by7rxaey8vv84" path="res://focus_out.mp3" id="5_cbffv"]
 [ext_resource type="Script" uid="uid://diey36ouvgd6r" path="res://help.gd" id="6_0m7cd"]
+[ext_resource type="AudioStream" uid="uid://bvrm3665ao1bn" path="res://camera_click.wav" id="6_2em84"]
+[ext_resource type="Script" uid="uid://dhgbxg2wsa1wg" path="res://click_sound.gd" id="7_0kugc"]
 [ext_resource type="Texture2D" uid="uid://px7p5pflysc3" path="res://camera_overlay.png" id="7_x2ust"]
+[ext_resource type="Script" uid="uid://5rtju78lnad6" path="res://fps.gd" id="8_eglai"]
 [ext_resource type="Texture2D" uid="uid://beg8ywl1a86bk" path="res://small_lens.png" id="9_1qy1k"]
+[ext_resource type="Script" uid="uid://crka3a2hrk2wy" path="res://timer.gd" id="9_m1ld8"]
 [ext_resource type="Texture2D" uid="uid://mo3ehv2wyrit" path="res://big_lens.png" id="10_3n40r"]
 [ext_resource type="Texture2D" uid="uid://bxy4nkboylfu5" path="res://hill.png" id="10_eod45"]
+[ext_resource type="Script" uid="uid://d12q250fwnghq" path="res://resolution.gd" id="10_m1ld8"]
 [ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://wallpaper.jpg" id="11_3n40r"]
 [ext_resource type="Script" uid="uid://ce4nnoop6jkk4" path="res://small_lens.gd" id="11_45aep"]
 [ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://grass.png" id="14_eod45"]
@@ -70,6 +75,12 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="HSlider" type="HSlider" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0277778
+anchor_top = -0.140432
+anchor_right = -0.0824653
+anchor_bottom = -0.121914
 offset_left = 137.0
 offset_top = 599.0
 offset_right = 1062.0
@@ -82,6 +93,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="FocusSound" type="AudioStreamPlayer2D" parent="HUD/Control/HSlider"]
 
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="HUD/Control/HSlider"]
+stream = ExtResource("6_2em84")
+volume_db = 20.0
+script = ExtResource("7_0kugc")
+
 [node name="Help" type="Label" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -90,7 +106,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 29
-text = "Scrollwheel for Zoom + Focus"
+text = "
+Scrollwheel for Zoom + Focus"
 horizontal_alignment = 1
 script = ExtResource("6_0m7cd")
 metadata/_edit_use_anchors_ = true
@@ -104,6 +121,44 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7_x2ust")
+
+[node name="FPS" type="Label" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = -82.0
+offset_right = 165.0
+offset_bottom = -51.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 21
+text = "60 FPS"
+script = ExtResource("8_eglai")
+
+[node name="Timer" type="Label" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 868.0
+offset_top = -587.0
+offset_right = 981.0
+offset_bottom = -556.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 21
+text = "00:16:08:00"
+script = ExtResource("9_m1ld8")
+
+[node name="Resolution" type="Label" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 124.0
+offset_right = 1078.0
+offset_bottom = 162.0
+theme_override_font_sizes/font_size = 21
+text = "3840x2160"
+script = ExtResource("10_m1ld8")
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -100

@@ -9,4 +9,5 @@ func _on_pressed() -> void:
 		print("Not on focus")
 		return
 	print("On focus!!")
+	SIGNAL_BUS.picutre_taken.emit()
 	parent.queue_free()
