@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=16 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://camera.gd" id="1_cbffv"]
+[ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay.gd" id="1_fbudy"]
 [ext_resource type="Texture2D" uid="uid://dqsjoxgpuogta" path="res://tree.png" id="1_n4psk"]
 [ext_resource type="Script" uid="uid://stwto1mhsd2a" path="res://depth_of_field.gd" id="2_oe8ih"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://focus_slider.gd" id="3_xuee5"]
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://focus_in.mp3" id="4_smepj"]
 [ext_resource type="AudioStream" uid="uid://by7rxaey8vv84" path="res://focus_out.mp3" id="5_cbffv"]
+[ext_resource type="Script" uid="uid://diey36ouvgd6r" path="res://help.gd" id="6_0m7cd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(1742, 864)
@@ -131,6 +133,7 @@ shader = SubResource("Shader_0m7cd")
 shader_parameter/strength = 2
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_fbudy")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
 position = Vector2(1004, 265)
@@ -168,6 +171,17 @@ focus_out_sound = ExtResource("5_cbffv")
 metadata/_edit_use_anchors_ = true
 
 [node name="FocusSound" type="AudioStreamPlayer2D" parent="HUD/Control/HSlider"]
+
+[node name="Help" type="Label" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Scrollwheel for Zoom + Focus"
+horizontal_alignment = 1
+script = ExtResource("6_0m7cd")
 
 [node name="Forest" type="Node" parent="."]
 

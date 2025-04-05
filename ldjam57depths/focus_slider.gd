@@ -27,7 +27,7 @@ func _on_value_changed(new_focus:float) -> void:
 
 
 func play_audio(new_focus) -> void:
-    if !focus_audio.playing:
+    if !focus_audio.playing and new_focus != old_focus_distance:
         if new_focus > old_focus_distance:
             focus_audio.stream = focus_in_sound
         else:
