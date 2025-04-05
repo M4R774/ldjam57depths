@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=32 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay.gd" id="1_fbudy"]
 [ext_resource type="Shader" uid="uid://cmxhcgk5fuoi4" path="res://blur.gdshader" id="1_smepj"]
 [ext_resource type="Script" uid="uid://stwto1mhsd2a" path="res://depth_of_field.gd" id="2_oe8ih"]
+[ext_resource type="Script" uid="uid://bh2ifgfq1q10m" path="res://shutter_animation.gd" id="3_hwi80"]
 [ext_resource type="Material" uid="uid://cedu04821amrq" path="res://blur.tres" id="3_smepj"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://focus_slider.gd" id="3_xuee5"]
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://focus_in.mp3" id="4_smepj"]
@@ -21,9 +22,71 @@
 [ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://wallpaper.jpg" id="11_3n40r"]
 [ext_resource type="Script" uid="uid://ce4nnoop6jkk4" path="res://small_lens.gd" id="11_45aep"]
 [ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://grass.png" id="14_eod45"]
+[ext_resource type="Script" uid="uid://b2wr7i3bq7c7o" path="res://available_space.gd" id="14_td3eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(2006, 1070)
+
+[sub_resource type="Animation" id="Animation_hwi80"]
+resource_name = "shutter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shutter2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(600, 1200), Vector2(62.755, 824.75), Vector2(600, 1200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shutter1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1100, -58), Vector2(-470.17, 300), Vector2(-1100, -58)]
+}
+
+[sub_resource type="Animation" id="Animation_td3eq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shutter2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 1200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shutter1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1100, -58)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yr68n"]
+_data = {
+&"RESET": SubResource("Animation_td3eq"),
+&"shutter": SubResource("Animation_hwi80")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_45aep"]
 shader = ExtResource("1_smepj")
@@ -51,7 +114,7 @@ script = ExtResource("1_fbudy")
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
 position = Vector2(1004, 265)
 script = ExtResource("1_cbffv")
-max_zoom = 20.0
+max_zoom = 8.0
 game_area = NodePath("PlayArea")
 
 [node name="PlayArea" type="Area2D" parent="Camera"]
@@ -74,17 +137,40 @@ size_flags_vertical = 3
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="ShutterAnimation" type="AnimationPlayer" parent="HUD/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_yr68n")
+}
+script = ExtResource("3_hwi80")
+
+[node name="Shutter1" type="ColorRect" parent="HUD/Control"]
+layout_mode = 0
+offset_left = -1100.0
+offset_top = -58.0
+offset_right = 342.0
+offset_bottom = 697.0
+rotation = -0.785398
+color = Color(0, 0, 0, 1)
+
+[node name="Shutter2" type="ColorRect" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 1200.0
+offset_right = 2042.0
+offset_bottom = 1955.0
+rotation = -0.785398
+color = Color(0, 0, 0, 1)
+
 [node name="HSlider" type="HSlider" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0277778
-anchor_top = -0.140432
-anchor_right = -0.0824653
-anchor_bottom = -0.121914
-offset_left = 137.0
-offset_top = 599.0
-offset_right = 1062.0
-offset_bottom = 628.0
+anchor_left = 0.0494792
+anchor_top = 0.78858
+anchor_right = 0.950521
+anchor_bottom = 0.820988
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 value = 10.0
 script = ExtResource("3_xuee5")
 focus_in_sound = ExtResource("4_smepj")
@@ -154,11 +240,23 @@ script = ExtResource("9_m1ld8")
 layout_mode = 0
 offset_left = 968.0
 offset_top = 124.0
-offset_right = 1078.0
+offset_right = 1075.0
 offset_bottom = 162.0
 theme_override_font_sizes/font_size = 21
 text = "3840x2160"
+horizontal_alignment = 2
 script = ExtResource("10_m1ld8")
+
+[node name="AvailableSpace" type="Label" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 158.0
+offset_right = 1072.0
+offset_bottom = 188.0
+theme_override_font_sizes/font_size = 21
+text = "9001"
+horizontal_alignment = 2
+script = ExtResource("14_td3eq")
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -100
