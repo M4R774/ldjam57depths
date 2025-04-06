@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var zoom_speed := 0.1
+@export var zoom_speed := 0.05
 @export var min_zoom := 1.0
 @export var max_zoom := 4.0
 @export var game_area: Area2D
@@ -43,14 +43,15 @@ func _unhandled_input(event):
 func map_range(value: float, low1: float, high1: float, low2: float, high2: float) -> float:
 	return low2 + (value - low1) * (high2 - low2) / (high1 - low1)
 
+
 func _update_camera_position():
 	var viewport = get_viewport()
 	var screen_size = viewport.get_visible_rect().size
 	var screen_center = screen_size * 0.5
 	var mouse_pos = viewport.get_mouse_position()
 	
-	# Lasketaan offset suhteessa ruudun keskelle (arvot vaihtelevat negatiivisesta positiiviseen)
-	var new_offset = (mouse_pos - screen_center) * zoom * 0.7
+	# Korjattu laskukaava: hiiren offset jaetaan zoomilla, jotta se muunnetaan oikein maailman koordinaateiksi
+	var new_offset = (mouse_pos - screen_center) * zoom * 2
 
 	# Lasketaan tavoitesijainta siten, että kun hiiri on keskellä, kamera osuu pelialueen keskelle
 	var target = area_center + new_offset

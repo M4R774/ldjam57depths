@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=47 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://5rtju78lnad6" path="res://gameplay/fps.gd" id="8_eglai"]
 [ext_resource type="Texture2D" uid="uid://beg8ywl1a86bk" path="res://gameplay/small_lens.png" id="9_1qy1k"]
 [ext_resource type="Script" uid="uid://crka3a2hrk2wy" path="res://gameplay/timer.gd" id="9_m1ld8"]
-[ext_resource type="Texture2D" uid="uid://mo3ehv2wyrit" path="res://gameplay/big_lens.png" id="10_3n40r"]
 [ext_resource type="Texture2D" uid="uid://bxy4nkboylfu5" path="res://gameplay/hill.png" id="10_eod45"]
 [ext_resource type="Script" uid="uid://d12q250fwnghq" path="res://gameplay/resolution.gd" id="10_m1ld8"]
 [ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://gameplay/wallpaper.jpg" id="11_3n40r"]
@@ -29,9 +28,12 @@
 [ext_resource type="Script" uid="uid://p16143dc8ck6" path="res://gameplay/help_2.gd" id="17_q2ml8"]
 [ext_resource type="Script" uid="uid://dj06eiordlj24" path="res://gameplay/game_over.gd" id="19_2qs7h"]
 [ext_resource type="Script" uid="uid://bpw0m53uv36os" path="res://gameplay/to_main_menu.gd" id="20_wxx72"]
+[ext_resource type="Texture2D" uid="uid://c1k6agnp44qd2" path="res://gameplay/tori.png" id="26_ni0ts"]
+[ext_resource type="Script" uid="uid://dykracabta5nl" path="res://gameplay/character.gd" id="28_ni0ts"]
+[ext_resource type="Texture2D" uid="uid://ceddcvk82jvi" path="res://characters/red.png" id="30_g4a3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
-size = Vector2(2006, 1070)
+size = Vector2(3556, 2840.5)
 
 [sub_resource type="Animation" id="Animation_td3eq"]
 length = 0.001
@@ -125,12 +127,32 @@ shader = ExtResource("1_smepj")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3n40r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyrfw"]
 shader = ExtResource("1_smepj")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyrfw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni0ts"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4a3a"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab7fx"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jypll"]
+shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1kvf"]
 shader = ExtResource("1_smepj")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
@@ -143,19 +165,19 @@ shader_parameter/sample_count = 16
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fbudy")
 
-[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
-position = Vector2(1004, 265)
-script = ExtResource("1_cbffv")
-max_zoom = 8.0
-game_area = NodePath("PlayArea")
+[node name="PlayArea" type="Area2D" parent="."]
+position = Vector2(1171, -207)
 
-[node name="PlayArea" type="Area2D" parent="Camera"]
-
-[node name="CollisionShape" type="CollisionShape2D" parent="Camera/PlayArea"]
-position = Vector2(8, -33)
+[node name="CollisionShape" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(0, -83.75)
 shape = SubResource("RectangleShape2D_smepj")
 
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
+script = ExtResource("1_cbffv")
+game_area = NodePath("../PlayArea")
+
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_n6aft")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -394,7 +416,7 @@ script = ExtResource("20_wxx72")
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -100
 material = SubResource("ShaderMaterial_45aep")
-position = Vector2(1009, 340)
+position = Vector2(-5012, -724)
 scale = Vector2(1.82933, 1.82933)
 texture = ExtResource("11_3n40r")
 script = ExtResource("2_oe8ih")
@@ -403,41 +425,83 @@ distance_from_camera = 100.0
 [node name="Hill" type="Sprite2D" parent="."]
 z_index = -10
 material = ExtResource("3_smepj")
-position = Vector2(1441, 251)
+position = Vector2(-4559, -277)
 texture = ExtResource("10_eod45")
 script = ExtResource("2_oe8ih")
 distance_from_camera = 90.0
 
-[node name="BigLens" type="Sprite2D" parent="."]
-z_index = 10
-material = SubResource("ShaderMaterial_3n40r")
-position = Vector2(905.576, 408.84)
-rotation = 0.916298
-scale = Vector2(0.098, 0.098)
-texture = ExtResource("10_3n40r")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 80.0
-
-[node name="Button" type="Button" parent="BigLens"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -196.0
-offset_top = -339.0
-offset_right = -1724.0
-offset_bottom = -1593.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 0
-flat = true
-script = ExtResource("11_45aep")
+[node name="Tori" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(1164, -439)
+scale = Vector2(1.95972, 1.95972)
+texture = ExtResource("26_ni0ts")
 
 [node name="Grass" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tyrfw")
-position = Vector2(1110, 821)
+position = Vector2(1152.31, 958.375)
+scale = Vector2(1.23847, 1.23847)
 texture = ExtResource("14_eod45")
 script = ExtResource("2_oe8ih")
-distance_from_camera = 11.0
+
+[node name="Character" type="Node2D" parent="."]
+position = Vector2(0, -1000)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Character"]
+material = SubResource("ShaderMaterial_ni0ts")
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character2" type="Node2D" parent="."]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Character2"]
+material = SubResource("ShaderMaterial_g4a3a")
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character3" type="Node2D" parent="."]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Character3"]
+material = SubResource("ShaderMaterial_ab7fx")
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character4" type="Node2D" parent="."]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Character4"]
+material = SubResource("ShaderMaterial_jypll")
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character5" type="Node2D" parent="."]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Character5"]
+material = SubResource("ShaderMaterial_i1kvf")
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
 
 [node name="SmallLens" type="Sprite2D" parent="."]
 z_index = 10
@@ -466,5 +530,4 @@ script = ExtResource("11_45aep")
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]
 [connection signal="timeout" from="HUD/Control/Battery/Timer" to="HUD/Control/Battery" method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/Control/GameOver/Button" to="HUD/Control/GameOver/Button" method="_on_pressed"]
-[connection signal="pressed" from="BigLens/Button" to="BigLens/Button" method="_on_pressed"]
 [connection signal="pressed" from="SmallLens/Button" to="SmallLens/Button" method="_on_pressed"]
