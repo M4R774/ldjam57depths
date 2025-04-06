@@ -11,4 +11,5 @@ func _on_picture_taken():
         value -= battery_consume
     else:
         value = 0
+        SIGNAL_BUS.game_over.emit("YOU RAN OUT OF BATTERY")
     $Label.text = "%02d" % [value] + " %"
