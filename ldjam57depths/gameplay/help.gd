@@ -7,7 +7,6 @@ func _ready():
 
 
 func focus_changed(_new_focus_distance):
-    print("focus_changed")
     activation_counter += 1
     if activation_counter <= 10:
         return

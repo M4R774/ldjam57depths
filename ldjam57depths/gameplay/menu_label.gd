@@ -12,7 +12,6 @@ func _ready():
 
 func _on_menu_item_selected(id):
 	var valittu = popup_menu.get_item_text(id)
-	print("Valittu:", valittu)
 	match valittu:
 		"Main Menu":
 			get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")

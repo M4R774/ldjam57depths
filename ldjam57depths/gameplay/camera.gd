@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var zoom_speed := 0.03
+@export var zoom_speed := 0.02
 @export var min_zoom := 1.0
 @export var max_zoom := 4.0
 @export var game_area: Area2D
@@ -9,7 +9,7 @@ var area_center := Vector2.ZERO
 var area_extents := Vector2.ZERO
 
 func _ready():
-	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	var collision_shape = game_area.get_node("CollisionShape")
 	if collision_shape and collision_shape.shape is RectangleShape2D:
 		var rect_shape = collision_shape.shape as RectangleShape2D
@@ -37,6 +37,8 @@ func _unhandled_input(event):
 		var new_focus = map_range(zoom.x, min_zoom, max_zoom, 0, 100)
 		SIGNAL_BUS.focus_changed.emit(new_focus)
 	elif event.is_action_pressed("shutter"):
+		get_tree().paused = true
+		$Timer.start()
 		SIGNAL_BUS.picture_taken.emit()
 
 

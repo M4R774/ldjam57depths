@@ -1,10 +1,11 @@
-[gd_scene load_steps=48 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=47 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
 [ext_resource type="Shader" uid="uid://cmxhcgk5fuoi4" path="res://gameplay/blur.gdshader" id="1_smepj"]
 [ext_resource type="Script" uid="uid://stwto1mhsd2a" path="res://gameplay/depth_of_field.gd" id="2_oe8ih"]
 [ext_resource type="Script" uid="uid://bh2ifgfq1q10m" path="res://gameplay/shutter_animation.gd" id="3_hwi80"]
+[ext_resource type="Script" uid="uid://dsys6ig7ucuv5" path="res://gameplay/unpause.gd" id="3_i1kvf"]
 [ext_resource type="Script" uid="uid://blrcdwc22upu2" path="res://gameplay/hud.gd" id="3_n6aft"]
 [ext_resource type="Material" uid="uid://cedu04821amrq" path="res://gameplay/blur.tres" id="3_smepj"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://gameplay/focus_slider.gd" id="3_xuee5"]
@@ -15,12 +16,10 @@
 [ext_resource type="Script" uid="uid://dhgbxg2wsa1wg" path="res://gameplay/click_sound.gd" id="7_0kugc"]
 [ext_resource type="Texture2D" uid="uid://px7p5pflysc3" path="res://gameplay/camera_overlay.png" id="7_x2ust"]
 [ext_resource type="Script" uid="uid://5rtju78lnad6" path="res://gameplay/fps.gd" id="8_eglai"]
-[ext_resource type="Texture2D" uid="uid://beg8ywl1a86bk" path="res://gameplay/small_lens.png" id="9_1qy1k"]
 [ext_resource type="Script" uid="uid://crka3a2hrk2wy" path="res://gameplay/timer.gd" id="9_m1ld8"]
 [ext_resource type="Texture2D" uid="uid://bxy4nkboylfu5" path="res://gameplay/hill.png" id="10_eod45"]
 [ext_resource type="Script" uid="uid://d12q250fwnghq" path="res://gameplay/resolution.gd" id="10_m1ld8"]
 [ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://gameplay/wallpaper.jpg" id="11_3n40r"]
-[ext_resource type="Script" uid="uid://ce4nnoop6jkk4" path="res://gameplay/small_lens.gd" id="11_45aep"]
 [ext_resource type="Script" uid="uid://ck43dmbyq7cfs" path="res://gameplay/battery.gd" id="13_s60jr"]
 [ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://gameplay/grass.png" id="14_eod45"]
 [ext_resource type="Script" uid="uid://b2wr7i3bq7c7o" path="res://gameplay/available_space.gd" id="14_td3eq"]
@@ -35,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://f4tmk5b3tft0" path="res://characters/green.png" id="31_i1kvf"]
 [ext_resource type="Texture2D" uid="uid://cniw63c78q4i4" path="res://characters/blue.png" id="32_h2b7s"]
 [ext_resource type="Texture2D" uid="uid://dm5slbecexkok" path="res://characters/waldo.png" id="35_i1kvf"]
+[ext_resource type="Script" uid="uid://dst57nuypdn27" path="res://gameplay/waldo.gd" id="36_h2b7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(3556, 2840.5)
@@ -136,11 +136,6 @@ shader = ExtResource("1_smepj")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy1k"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
 [sub_resource type="Shader" id="Shader_i1kvf"]
 code = "shader_type canvas_item;
 
@@ -195,8 +190,13 @@ min_zoom = 0.5
 max_zoom = 1.5
 game_area = NodePath("../PlayArea")
 
+[node name="Timer" type="Timer" parent="Camera"]
+process_mode = 3
+wait_time = 0.3
+one_shot = true
+script = ExtResource("3_i1kvf")
+
 [node name="HUD" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("3_n6aft")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -212,6 +212,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ShutterAnimation" type="AnimationPlayer" parent="HUD/Control"]
+process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_yr68n")
 }
@@ -252,8 +253,10 @@ focus_out_sound = ExtResource("5_cbffv")
 metadata/_edit_use_anchors_ = true
 
 [node name="FocusSound" type="AudioStreamPlayer" parent="HUD/Control/HSlider"]
+process_mode = 3
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="HUD/Control/HSlider"]
+process_mode = 3
 stream = ExtResource("6_2em84")
 volume_db = 20.0
 script = ExtResource("7_0kugc")
@@ -412,9 +415,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
-text = "YOU DIED
+text = "GAME OVER
 
-YOU RAN OUT OF BATTERY"
+SCORE: 312312.3123"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -464,30 +467,6 @@ position = Vector2(1152.31, 958.375)
 scale = Vector2(1.23847, 1.23847)
 texture = ExtResource("14_eod45")
 script = ExtResource("2_oe8ih")
-
-[node name="SmallLens" type="Sprite2D" parent="."]
-z_index = 10
-material = SubResource("ShaderMaterial_1qy1k")
-position = Vector2(289, 664)
-rotation = -1.33518
-scale = Vector2(0.284635, 0.284635)
-texture = ExtResource("9_1qy1k")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 10.0
-
-[node name="Button" type="Button" parent="SmallLens"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -168.929
-offset_top = -248.426
-offset_right = -1733.93
-offset_bottom = -1666.43
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 0
-flat = true
-script = ExtResource("11_45aep")
 
 [node name="Node" type="Node" parent="."]
 
@@ -1105,7 +1084,10 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("35_i1kvf")
 script = ExtResource("2_oe8ih")
 
+[node name="Waldo" type="Node2D" parent="Waldo"]
+script = ExtResource("36_h2b7s")
+
+[connection signal="timeout" from="Camera/Timer" to="Camera/Timer" method="_on_timeout"]
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]
 [connection signal="timeout" from="HUD/Control/Battery/Timer" to="HUD/Control/Battery" method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/Control/GameOver/Button" to="HUD/Control/GameOver/Button" method="_on_pressed"]
-[connection signal="pressed" from="SmallLens/Button" to="SmallLens/Button" method="_on_pressed"]

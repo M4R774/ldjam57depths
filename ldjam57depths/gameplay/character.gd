@@ -1,7 +1,7 @@
 extends Node2D
 
 # Määritellään liikkumisalue (Rect2: sijainti ja koko)
-var area_rect: Rect2 = Rect2(Vector2(-500, -650), Vector2(3500, 1700))
+var area_rect: Rect2 = Rect2(Vector2(-350, -550), Vector2(3200, 1200))
 
 # Liikkumiseen liittyvät muuttujat
 var target_pos: Vector2
