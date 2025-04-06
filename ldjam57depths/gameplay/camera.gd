@@ -28,10 +28,14 @@ func _unhandled_input(event):
 		zoom *= 1.0 - zoom_speed
 		zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 		zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+		var new_focus = map_range(zoom.x, min_zoom, max_zoom, 0, 100)
+		SIGNAL_BUS.focus_changed.emit(new_focus)
 	elif event.is_action_pressed("zoom_in"):
 		zoom *= 1.0 + zoom_speed
 		zoom.x = clamp(zoom.x, min_zoom, max_zoom)
 		zoom.y = clamp(zoom.y, min_zoom, max_zoom)
+		var new_focus = map_range(zoom.x, min_zoom, max_zoom, 0, 100)
+		SIGNAL_BUS.focus_changed.emit(new_focus)
 	elif event.is_action_pressed("shutter"):
 		SIGNAL_BUS.picture_taken.emit()
 
