@@ -7,8 +7,17 @@ func _ready():
 
 func _on_picture_taken():
     var battery_consume = randf_range(9.0, 11.0)
-    if value > 9:
-        value -= battery_consume
+    reduce_battery(battery_consume)
+
+
+func _on_timer_timeout():
+    var battery_consume = randf_range(0.0, 0.6)
+    reduce_battery(battery_consume)
+
+
+func reduce_battery(amount):
+    if value > amount:
+        value -= amount
     else:
         value = 0
         SIGNAL_BUS.game_over.emit("YOU RAN OUT OF BATTERY")

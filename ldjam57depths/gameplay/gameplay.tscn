@@ -289,6 +289,9 @@ offset_top = 9.0
 offset_right = 96.0
 offset_bottom = 20.0
 
+[node name="Timer" type="Timer" parent="HUD/Control/Battery"]
+autostart = true
+
 [node name="Resolution" type="Label" parent="HUD/Control"]
 layout_mode = 0
 offset_left = 968.0
@@ -461,6 +464,7 @@ flat = true
 script = ExtResource("11_45aep")
 
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]
+[connection signal="timeout" from="HUD/Control/Battery/Timer" to="HUD/Control/Battery" method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/Control/GameOver/Button" to="HUD/Control/GameOver/Button" method="_on_pressed"]
 [connection signal="pressed" from="BigLens/Button" to="BigLens/Button" method="_on_pressed"]
 [connection signal="pressed" from="SmallLens/Button" to="SmallLens/Button" method="_on_pressed"]
