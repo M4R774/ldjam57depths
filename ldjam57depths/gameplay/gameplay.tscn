@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=48 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -28,9 +28,13 @@
 [ext_resource type="Script" uid="uid://p16143dc8ck6" path="res://gameplay/help_2.gd" id="17_q2ml8"]
 [ext_resource type="Script" uid="uid://dj06eiordlj24" path="res://gameplay/game_over.gd" id="19_2qs7h"]
 [ext_resource type="Script" uid="uid://bpw0m53uv36os" path="res://gameplay/to_main_menu.gd" id="20_wxx72"]
-[ext_resource type="Texture2D" uid="uid://c1k6agnp44qd2" path="res://gameplay/tori.png" id="26_ni0ts"]
+[ext_resource type="Texture2D" uid="uid://b2b5y2tm4mngl" path="res://tori.jpg" id="26_i1kvf"]
 [ext_resource type="Script" uid="uid://dykracabta5nl" path="res://gameplay/character.gd" id="28_ni0ts"]
 [ext_resource type="Texture2D" uid="uid://ceddcvk82jvi" path="res://characters/red.png" id="30_g4a3a"]
+[ext_resource type="Texture2D" uid="uid://c3uig3p5c0sng" path="res://characters/yellow.png" id="30_jypll"]
+[ext_resource type="Texture2D" uid="uid://f4tmk5b3tft0" path="res://characters/green.png" id="31_i1kvf"]
+[ext_resource type="Texture2D" uid="uid://cniw63c78q4i4" path="res://characters/blue.png" id="32_h2b7s"]
+[ext_resource type="Texture2D" uid="uid://dm5slbecexkok" path="res://characters/waldo.png" id="35_i1kvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(3556, 2840.5)
@@ -132,33 +136,45 @@ shader = ExtResource("1_smepj")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni0ts"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4a3a"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab7fx"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jypll"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1kvf"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy1k"]
 shader = ExtResource("1_smepj")
+shader_parameter/strength = 1.0
+shader_parameter/sample_count = 16
+
+[sub_resource type="Shader" id="Shader_i1kvf"]
+code = "shader_type canvas_item;
+
+uniform float strength : hint_range(1, 512) = 0;
+uniform int sample_count : hint_range(1, 64) = 100;
+
+// Pseudo-random number generator
+float rand(vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+vec4 blur_random(sampler2D tex, vec2 uv, vec2 pixelSize) {
+    vec4 color = vec4(0.0);
+
+    float time_offset = TIME * 0.1; // Control how fast blur randomness changes
+
+    for (int i = 0; i < sample_count; i++) {
+        float x = rand(uv + float(i) + time_offset) - 0.5;
+        float y = rand(uv + float(i) + 1.2345 + time_offset) - 0.5;
+        vec2 offset = vec2(x, y) * strength * pixelSize;
+        color += texture(tex, uv + offset);
+    }
+
+    return color / float(sample_count);
+}
+
+void fragment() {
+    COLOR = blur_random(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2b7s"]
+shader = SubResource("Shader_i1kvf")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
@@ -173,7 +189,10 @@ position = Vector2(0, -83.75)
 shape = SubResource("RectangleShape2D_smepj")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("game_area")]
+unique_name_in_owner = true
 script = ExtResource("1_cbffv")
+min_zoom = 0.5
+max_zoom = 1.5
 game_area = NodePath("../PlayArea")
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -287,6 +306,7 @@ offset_top = -592.0
 offset_right = 159.0
 offset_bottom = -561.0
 grow_vertical = 0
+mouse_filter = 2
 theme_override_icons/grabber = SubResource("ImageTexture_gh0v3")
 theme_override_styles/slider = SubResource("StyleBoxFlat_s60jr")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_q2ml8")
@@ -431,76 +451,18 @@ script = ExtResource("2_oe8ih")
 distance_from_camera = 90.0
 
 [node name="Tori" type="Sprite2D" parent="."]
-z_index = -2
-position = Vector2(1164, -439)
-scale = Vector2(1.95972, 1.95972)
-texture = ExtResource("26_ni0ts")
+z_index = -200
+position = Vector2(1162, -5)
+scale = Vector2(1.07255, 1.07255)
+texture = ExtResource("26_i1kvf")
 
 [node name="Grass" type="Sprite2D" parent="."]
+visible = false
+z_index = -101
 material = SubResource("ShaderMaterial_tyrfw")
 position = Vector2(1152.31, 958.375)
 scale = Vector2(1.23847, 1.23847)
 texture = ExtResource("14_eod45")
-script = ExtResource("2_oe8ih")
-
-[node name="Character" type="Node2D" parent="."]
-position = Vector2(0, -1000)
-scale = Vector2(0.3, 0.3)
-script = ExtResource("28_ni0ts")
-
-[node name="Sprite" type="Sprite2D" parent="Character"]
-material = SubResource("ShaderMaterial_ni0ts")
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(1, 1)
-texture = ExtResource("30_g4a3a")
-script = ExtResource("2_oe8ih")
-
-[node name="Character2" type="Node2D" parent="."]
-position = Vector2(0, 700)
-scale = Vector2(2, 2)
-script = ExtResource("28_ni0ts")
-
-[node name="Sprite" type="Sprite2D" parent="Character2"]
-material = SubResource("ShaderMaterial_g4a3a")
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(1, 1)
-texture = ExtResource("30_g4a3a")
-script = ExtResource("2_oe8ih")
-
-[node name="Character3" type="Node2D" parent="."]
-position = Vector2(0, 700)
-scale = Vector2(2, 2)
-script = ExtResource("28_ni0ts")
-
-[node name="Sprite" type="Sprite2D" parent="Character3"]
-material = SubResource("ShaderMaterial_ab7fx")
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(1, 1)
-texture = ExtResource("30_g4a3a")
-script = ExtResource("2_oe8ih")
-
-[node name="Character4" type="Node2D" parent="."]
-position = Vector2(0, 700)
-scale = Vector2(2, 2)
-script = ExtResource("28_ni0ts")
-
-[node name="Sprite" type="Sprite2D" parent="Character4"]
-material = SubResource("ShaderMaterial_jypll")
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(1, 1)
-texture = ExtResource("30_g4a3a")
-script = ExtResource("2_oe8ih")
-
-[node name="Character5" type="Node2D" parent="."]
-position = Vector2(0, 700)
-scale = Vector2(2, 2)
-script = ExtResource("28_ni0ts")
-
-[node name="Sprite" type="Sprite2D" parent="Character5"]
-material = SubResource("ShaderMaterial_i1kvf")
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(1, 1)
-texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
 [node name="SmallLens" type="Sprite2D" parent="."]
@@ -526,6 +488,622 @@ grow_vertical = 2
 focus_mode = 0
 flat = true
 script = ExtResource("11_45aep")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Character" type="Node2D" parent="Node"]
+position = Vector2(-42, -1000)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character2" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character2"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character3" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character3"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character4" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character4"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character5" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character5"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character6" type="Node2D" parent="Node"]
+position = Vector2(-478.91, -575.491)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character6"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character7" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character7"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character8" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character8"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character9" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character9"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character10" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character10"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character11" type="Node2D" parent="Node"]
+position = Vector2(3000, -700)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character11"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character12" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character12"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character13" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character13"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character14" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character14"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character15" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character15"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character16" type="Node2D" parent="Node"]
+position = Vector2(-345, -1000)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character16"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character17" type="Node2D" parent="Node"]
+position = Vector2(3000, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character17"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character18" type="Node2D" parent="Node"]
+position = Vector2(-485, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character18"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character19" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character19"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character20" type="Node2D" parent="Node"]
+position = Vector2(-310, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character20"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character21" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character21"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character22" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character22"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character23" type="Node2D" parent="Node"]
+position = Vector2(500, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character23"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character24" type="Node2D" parent="Node"]
+position = Vector2(-185.4, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character24"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character25" type="Node2D" parent="Node"]
+position = Vector2(-485, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character25"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character26" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character26"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character27" type="Node2D" parent="Node"]
+position = Vector2(-310, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character27"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character28" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character28"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character29" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character29"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character30" type="Node2D" parent="Node"]
+position = Vector2(500, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character30"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character31" type="Node2D" parent="Node"]
+position = Vector2(-185.4, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character31"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character32" type="Node2D" parent="Node"]
+position = Vector2(-42, -1000)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character32"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character33" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character33"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character34" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character34"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character35" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character35"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character36" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character36"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character37" type="Node2D" parent="Node"]
+position = Vector2(-478.91, -575.491)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character37"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character38" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character38"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character39" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character39"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character40" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character40"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character41" type="Node2D" parent="Node"]
+position = Vector2(0, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character41"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character42" type="Node2D" parent="Node"]
+position = Vector2(3000, -700)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character42"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character43" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character43"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character44" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character44"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character45" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character45"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character46" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character46"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character47" type="Node2D" parent="Node"]
+position = Vector2(-345, -1000)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character47"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character48" type="Node2D" parent="Node"]
+position = Vector2(3000, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character48"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character49" type="Node2D" parent="Node"]
+position = Vector2(-485, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character49"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character50" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character50"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character51" type="Node2D" parent="Node"]
+position = Vector2(-310, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character51"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character52" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character52"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character53" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character53"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character54" type="Node2D" parent="Node"]
+position = Vector2(500, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character54"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character55" type="Node2D" parent="Node"]
+position = Vector2(-185.4, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character55"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character56" type="Node2D" parent="Node"]
+position = Vector2(-485, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character56"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character57" type="Node2D" parent="Node"]
+position = Vector2(-345, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character57"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character58" type="Node2D" parent="Node"]
+position = Vector2(-310, 700)
+scale = Vector2(2, 2)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character58"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Character59" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character59"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_g4a3a")
+script = ExtResource("2_oe8ih")
+
+[node name="Character60" type="Node2D" parent="Node"]
+position = Vector2(-345, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character60"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("30_jypll")
+script = ExtResource("2_oe8ih")
+
+[node name="Character61" type="Node2D" parent="Node"]
+position = Vector2(500, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character61"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("31_i1kvf")
+script = ExtResource("2_oe8ih")
+
+[node name="Character62" type="Node2D" parent="Node"]
+position = Vector2(-185.4, -245)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Node/Character62"]
+material = SubResource("ShaderMaterial_h2b7s")
+texture = ExtResource("32_h2b7s")
+script = ExtResource("2_oe8ih")
+
+[node name="Waldo" type="Node2D" parent="."]
+position = Vector2(1084.11, -312.72)
+script = ExtResource("28_ni0ts")
+
+[node name="Sprite" type="Sprite2D" parent="Waldo"]
+material = SubResource("ShaderMaterial_h2b7s")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("35_i1kvf")
+script = ExtResource("2_oe8ih")
 
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]
 [connection signal="timeout" from="HUD/Control/Battery/Timer" to="HUD/Control/Battery" method="_on_timer_timeout"]
