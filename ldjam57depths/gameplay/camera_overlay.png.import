@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beg8ywl1a86bk"
-path="res://.godot/imported/small_lens.png-780c94d96ee1f65b6612b72de8236c19.ctex"
+uid="uid://px7p5pflysc3"
+path="res://.godot/imported/camera_overlay.png-037a002df79c81c50a311e924e742bec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://small_lens.png"
-dest_files=["res://.godot/imported/small_lens.png-780c94d96ee1f65b6612b72de8236c19.ctex"]
+source_file="res://gameplay/camera_overlay.png"
+dest_files=["res://.godot/imported/camera_overlay.png-037a002df79c81c50a311e924e742bec.ctex"]
 
 [params]
 

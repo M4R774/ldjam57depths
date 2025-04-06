@@ -13,11 +13,11 @@ config_version=5
 config/name="ldjam57depths"
 run/main_scene="uid://ddgl5xndcbusb"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://gameplay/icon.svg"
 
 [autoload]
 
-SIGNAL_BUS="*res://signal_bus.gd"
+SIGNAL_BUS="*res://gameplay/signal_bus.gd"
 
 [display]
 

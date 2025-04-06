@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bvrm3665ao1bn"
-path="res://.godot/imported/camera_click.wav-b8aabece9a366d2241fd3d87eeb72c04.sample"
+path="res://.godot/imported/camera_click.wav-995c5672d5307ac09978e98276a9bbe7.sample"
 
 [deps]
 
-source_file="res://camera_click.wav"
-dest_files=["res://.godot/imported/camera_click.wav-b8aabece9a366d2241fd3d87eeb72c04.sample"]
+source_file="res://gameplay/camera_click.wav"
+dest_files=["res://.godot/imported/camera_click.wav-995c5672d5307ac09978e98276a9bbe7.sample"]
 
 [params]
 

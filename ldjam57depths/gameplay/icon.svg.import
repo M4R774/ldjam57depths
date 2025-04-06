@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mo3ehv2wyrit"
-path="res://.godot/imported/big_lens.png-f24d8a9feee6abb4cc4bae0fd3b54f28.ctex"
+uid="uid://cbuagyt2jkels"
+path="res://.godot/imported/icon.svg-bb3090efeae77bc425d20391cf245214.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://big_lens.png"
-dest_files=["res://.godot/imported/big_lens.png-f24d8a9feee6abb4cc4bae0fd3b54f28.ctex"]
+source_file="res://gameplay/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-bb3090efeae77bc425d20391cf245214.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
