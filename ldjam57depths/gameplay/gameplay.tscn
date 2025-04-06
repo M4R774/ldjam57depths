@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=38 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://gameplay/grass.png" id="14_eod45"]
 [ext_resource type="Script" uid="uid://b2wr7i3bq7c7o" path="res://gameplay/available_space.gd" id="14_td3eq"]
 [ext_resource type="Script" uid="uid://cglmxosxtmsyq" path="res://gameplay/menu_label.gd" id="15_yr68n"]
+[ext_resource type="Script" uid="uid://p16143dc8ck6" path="res://gameplay/help_2.gd" id="17_q2ml8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(2006, 1070)
@@ -212,20 +213,6 @@ stream = ExtResource("6_2em84")
 volume_db = 20.0
 script = ExtResource("7_0kugc")
 
-[node name="Help" type="Label" parent="HUD/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 29
-text = "
-Scrollwheel for Zoom + Focus"
-horizontal_alignment = 1
-script = ExtResource("6_0m7cd")
-metadata/_edit_use_anchors_ = true
-
 [node name="TextureRect" type="TextureRect" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -329,6 +316,33 @@ offset_bottom = 596.0
 theme_override_font_sizes/font_size = 21
 text = "MENU ☰"
 script = ExtResource("15_yr68n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Help" type="Label" parent="HUD/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "
+Scrollwheel for Zoom + Focus"
+horizontal_alignment = 1
+script = ExtResource("6_0m7cd")
+metadata/_edit_use_anchors_ = true
+
+[node name="Help2" type="Label" parent="HUD/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "
+Left click to take picture"
+horizontal_alignment = 1
+script = ExtResource("17_q2ml8")
+metadata/_edit_use_anchors_ = true
 
 [node name="Wallpaper" type="Sprite2D" parent="."]
 z_index = -100
