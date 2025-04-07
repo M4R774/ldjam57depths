@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://u1jeculqalca"]
+[gd_scene load_steps=4 format=3 uid="uid://u1jeculqalca"]
 
+[ext_resource type="Texture2D" uid="uid://bfyjd58qbv2na" path="res://main_menu/background.jpg" id="1_d3a7t"]
 [ext_resource type="Script" uid="uid://ce6rft6oydo7x" path="res://main_menu/button.gd" id="1_oa53l"]
+[ext_resource type="Script" uid="uid://cr2kct3oiyktk" path="res://main_menu/quit.gd" id="3_3shxk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,41 +12,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_d3a7t")
+expand_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 40
 
-[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="Panel" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 59
-text = "Papparazzi Pro"
+size_flags_vertical = 3
+color = Color(1, 0.458824, 0, 0.552941)
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.811765, 1, 1)
+theme_override_font_sizes/font_size = 90
+text = "Photo Pro
+Papparazzi"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 67
 text = "START"
 script = ExtResource("1_oa53l")
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 67
+text = "QUIT"
+script = ExtResource("3_3shxk")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button2" to="MarginContainer/VBoxContainer/Button2" method="_on_pressed"]

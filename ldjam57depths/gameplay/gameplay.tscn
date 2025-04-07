@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=69 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -9,25 +9,40 @@
 [ext_resource type="Script" uid="uid://blrcdwc22upu2" path="res://gameplay/hud.gd" id="3_n6aft"]
 [ext_resource type="Material" uid="uid://cedu04821amrq" path="res://gameplay/blur.tres" id="3_smepj"]
 [ext_resource type="Script" uid="uid://651m43vi8jcq" path="res://gameplay/focus_slider.gd" id="3_xuee5"]
+[ext_resource type="Script" uid="uid://dbpm6m5k31a2j" path="res://gameplay/audio_stream_player.gd" id="4_6kw11"]
 [ext_resource type="AudioStream" uid="uid://chnvm5f7tasel" path="res://gameplay/focus_in.mp3" id="4_smepj"]
 [ext_resource type="AudioStream" uid="uid://by7rxaey8vv84" path="res://gameplay/focus_out.mp3" id="5_cbffv"]
+[ext_resource type="AudioStream" uid="uid://c8aa2b4sc12m0" path="res://voicelines/51.mp3" id="5_ui6ly"]
 [ext_resource type="Script" uid="uid://diey36ouvgd6r" path="res://gameplay/help.gd" id="6_0m7cd"]
 [ext_resource type="AudioStream" uid="uid://bvrm3665ao1bn" path="res://gameplay/camera_click.wav" id="6_2em84"]
+[ext_resource type="AudioStream" uid="uid://ch453b83nhqg0" path="res://voicelines/52.mp3" id="6_oltbr"]
 [ext_resource type="Script" uid="uid://dhgbxg2wsa1wg" path="res://gameplay/click_sound.gd" id="7_0kugc"]
+[ext_resource type="AudioStream" uid="uid://13551cop5uda" path="res://voicelines/53.mp3" id="7_tlxo4"]
 [ext_resource type="Texture2D" uid="uid://px7p5pflysc3" path="res://gameplay/camera_overlay.png" id="7_x2ust"]
 [ext_resource type="Script" uid="uid://5rtju78lnad6" path="res://gameplay/fps.gd" id="8_eglai"]
+[ext_resource type="AudioStream" uid="uid://cxwn4ridaodun" path="res://voicelines/41.mp3" id="8_r55xe"]
 [ext_resource type="Script" uid="uid://crka3a2hrk2wy" path="res://gameplay/timer.gd" id="9_m1ld8"]
-[ext_resource type="Texture2D" uid="uid://bxy4nkboylfu5" path="res://gameplay/hill.png" id="10_eod45"]
+[ext_resource type="AudioStream" uid="uid://cxlmmanu4nmb8" path="res://voicelines/42.mp3" id="9_qq0hj"]
+[ext_resource type="AudioStream" uid="uid://d1gxvakpq6xe1" path="res://voicelines/31.mp3" id="10_kcvha"]
 [ext_resource type="Script" uid="uid://d12q250fwnghq" path="res://gameplay/resolution.gd" id="10_m1ld8"]
-[ext_resource type="Texture2D" uid="uid://dxgv5fkg7m11q" path="res://gameplay/wallpaper.jpg" id="11_3n40r"]
+[ext_resource type="AudioStream" uid="uid://dsrbpbsg01vau" path="res://voicelines/32.mp3" id="11_lyn0c"]
+[ext_resource type="AudioStream" uid="uid://337ma0oi3gg6" path="res://voicelines/33.mp3" id="12_2mfa3"]
+[ext_resource type="AudioStream" uid="uid://bfn0us1xgqsf3" path="res://voicelines/21.mp3" id="13_2o5d7"]
 [ext_resource type="Script" uid="uid://ck43dmbyq7cfs" path="res://gameplay/battery.gd" id="13_s60jr"]
-[ext_resource type="Texture2D" uid="uid://bmymognjbsf3g" path="res://gameplay/grass.png" id="14_eod45"]
+[ext_resource type="AudioStream" uid="uid://4ov8d3b2k8uy" path="res://voicelines/22.mp3" id="14_6xr2a"]
 [ext_resource type="Script" uid="uid://b2wr7i3bq7c7o" path="res://gameplay/available_space.gd" id="14_td3eq"]
+[ext_resource type="AudioStream" uid="uid://dokoopwxvt47r" path="res://voicelines/23.mp3" id="15_yklrg"]
 [ext_resource type="Script" uid="uid://cglmxosxtmsyq" path="res://gameplay/menu_label.gd" id="15_yr68n"]
+[ext_resource type="AudioStream" uid="uid://b62b3skb8ohk" path="res://voicelines/11.mp3" id="16_aok6h"]
+[ext_resource type="AudioStream" uid="uid://dbk1wy5hpomyq" path="res://voicelines/12.mp3" id="17_ota8k"]
 [ext_resource type="Script" uid="uid://p16143dc8ck6" path="res://gameplay/help_2.gd" id="17_q2ml8"]
+[ext_resource type="AudioStream" uid="uid://rlgpegou1bqh" path="res://voicelines/13.mp3" id="18_8wj4m"]
 [ext_resource type="Script" uid="uid://dj06eiordlj24" path="res://gameplay/game_over.gd" id="19_2qs7h"]
+[ext_resource type="AudioStream" uid="uid://78smcdwtd8c2" path="res://voicelines/14.mp3" id="19_87678"]
+[ext_resource type="AudioStream" uid="uid://di6dm6b0kqtyx" path="res://voicelines/01.mp3" id="20_fglxu"]
 [ext_resource type="Script" uid="uid://bpw0m53uv36os" path="res://gameplay/to_main_menu.gd" id="20_wxx72"]
-[ext_resource type="Texture2D" uid="uid://b2b5y2tm4mngl" path="res://tori.jpg" id="26_i1kvf"]
+[ext_resource type="AudioStream" uid="uid://dd56fj2uc6t18" path="res://voicelines/02.mp3" id="21_w8tx5"]
+[ext_resource type="AudioStream" uid="uid://dy1iwpsdaa1d3" path="res://voicelines/03.mp3" id="22_4s6n4"]
 [ext_resource type="Script" uid="uid://dykracabta5nl" path="res://gameplay/character.gd" id="28_ni0ts"]
 [ext_resource type="Texture2D" uid="uid://ceddcvk82jvi" path="res://characters/red.png" id="30_g4a3a"]
 [ext_resource type="Texture2D" uid="uid://c3uig3p5c0sng" path="res://characters/yellow.png" id="30_jypll"]
@@ -35,6 +50,16 @@
 [ext_resource type="Texture2D" uid="uid://cniw63c78q4i4" path="res://characters/blue.png" id="32_h2b7s"]
 [ext_resource type="Texture2D" uid="uid://dm5slbecexkok" path="res://characters/waldo.png" id="35_i1kvf"]
 [ext_resource type="Script" uid="uid://dst57nuypdn27" path="res://gameplay/waldo.gd" id="36_h2b7s"]
+[ext_resource type="Texture2D" uid="uid://cphvxgwhlu2ax" path="res://1.jpg" id="36_ooaiw"]
+[ext_resource type="Texture2D" uid="uid://7qk42mfyi4rn" path="res://1.png" id="37_gn87n"]
+[ext_resource type="Texture2D" uid="uid://ckbji5xla27dp" path="res://2.png" id="38_p35s3"]
+[ext_resource type="Texture2D" uid="uid://ce46nsw3qlfdi" path="res://3.png" id="39_bcr21"]
+[ext_resource type="Texture2D" uid="uid://g6pbhfla37b8" path="res://4.png" id="40_i5xiv"]
+[ext_resource type="Texture2D" uid="uid://bvqmsehhibh1g" path="res://5.png" id="41_4xxsf"]
+[ext_resource type="Texture2D" uid="uid://bbsotnml2uwsq" path="res://6.png" id="42_vbdwp"]
+[ext_resource type="Texture2D" uid="uid://ce8a2fwp88h7m" path="res://7.png" id="43_le6kb"]
+[ext_resource type="Texture2D" uid="uid://s36cxmwjnhhf" path="res://8.png" id="44_21722"]
+[ext_resource type="Texture2D" uid="uid://bwg51njhx5ky6" path="res://9.png" id="45_32jyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smepj"]
 size = Vector2(3556, 2840.5)
@@ -126,50 +151,8 @@ corner_radius_bottom_left = 5
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_45aep"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrp3b"]
 shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyrfw"]
-shader = ExtResource("1_smepj")
-shader_parameter/strength = 1.0
-shader_parameter/sample_count = 16
-
-[sub_resource type="Shader" id="Shader_i1kvf"]
-code = "shader_type canvas_item;
-
-uniform float strength : hint_range(1, 512) = 0;
-uniform int sample_count : hint_range(1, 64) = 100;
-
-// Pseudo-random number generator
-float rand(vec2 uv) {
-    return fract(sin(dot(uv.xy,
-        vec2(12.9898, 78.233))) * 43758.5453123);
-}
-
-vec4 blur_random(sampler2D tex, vec2 uv, vec2 pixelSize) {
-    vec4 color = vec4(0.0);
-
-    float time_offset = TIME * 0.1; // Control how fast blur randomness changes
-
-    for (int i = 0; i < sample_count; i++) {
-        float x = rand(uv + float(i) + time_offset) - 0.5;
-        float y = rand(uv + float(i) + 1.2345 + time_offset) - 0.5;
-        vec2 offset = vec2(x, y) * strength * pixelSize;
-        color += texture(tex, uv + offset);
-    }
-
-    return color / float(sample_count);
-}
-
-void fragment() {
-    COLOR = blur_random(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2b7s"]
-shader = SubResource("Shader_i1kvf")
 shader_parameter/strength = 1.0
 shader_parameter/sample_count = 16
 
@@ -196,7 +179,18 @@ wait_time = 0.3
 one_shot = true
 script = ExtResource("3_i1kvf")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera"]
+process_mode = 3
+script = ExtResource("4_6kw11")
+excellent_picture_sounds = Array[AudioStream]([ExtResource("5_ui6ly"), ExtResource("6_oltbr"), ExtResource("7_tlxo4")])
+good_picture_sounds = Array[AudioStream]([ExtResource("8_r55xe"), ExtResource("9_qq0hj")])
+ok_picture_sounds = Array[AudioStream]([ExtResource("10_kcvha"), ExtResource("11_lyn0c"), ExtResource("12_2mfa3")])
+not_terrible_picture_sounds = Array[AudioStream]([ExtResource("13_2o5d7"), ExtResource("14_6xr2a"), ExtResource("15_yklrg")])
+bad_picture_sounds = Array[AudioStream]([ExtResource("16_aok6h"), ExtResource("17_ota8k"), ExtResource("18_8wj4m"), ExtResource("19_87678")])
+terrible_picture_sounds = Array[AudioStream]([ExtResource("20_fglxu"), ExtResource("21_w8tx5"), ExtResource("22_4s6n4")])
+
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_n6aft")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -397,13 +391,14 @@ script = ExtResource("17_q2ml8")
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOver" type="ColorRect" parent="HUD/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.815686)
 script = ExtResource("19_2qs7h")
 
 [node name="Label" type="Label" parent="HUD/Control/GameOver"]
@@ -413,7 +408,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 64
 text = "GAME OVER
 
@@ -436,38 +431,6 @@ theme_override_font_sizes/font_size = 41
 text = "Main menu"
 script = ExtResource("20_wxx72")
 
-[node name="Wallpaper" type="Sprite2D" parent="."]
-z_index = -100
-material = SubResource("ShaderMaterial_45aep")
-position = Vector2(-5012, -724)
-scale = Vector2(1.82933, 1.82933)
-texture = ExtResource("11_3n40r")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 100.0
-
-[node name="Hill" type="Sprite2D" parent="."]
-z_index = -10
-material = ExtResource("3_smepj")
-position = Vector2(-4559, -277)
-texture = ExtResource("10_eod45")
-script = ExtResource("2_oe8ih")
-distance_from_camera = 90.0
-
-[node name="Tori" type="Sprite2D" parent="."]
-z_index = -200
-position = Vector2(1162, -5)
-scale = Vector2(1.07255, 1.07255)
-texture = ExtResource("26_i1kvf")
-
-[node name="Grass" type="Sprite2D" parent="."]
-visible = false
-z_index = -101
-material = SubResource("ShaderMaterial_tyrfw")
-position = Vector2(1152.31, 958.375)
-scale = Vector2(1.23847, 1.23847)
-texture = ExtResource("14_eod45")
-script = ExtResource("2_oe8ih")
-
 [node name="Node" type="Node" parent="."]
 
 [node name="Character" type="Node2D" parent="Node"]
@@ -476,7 +439,7 @@ scale = Vector2(0.3, 0.3)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -486,7 +449,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character2"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -496,7 +459,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character3"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -506,7 +469,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character4"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -516,7 +479,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character5"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -526,7 +489,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character6"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -536,7 +499,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character7"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -546,7 +509,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character8"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -556,7 +519,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character9"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -566,7 +529,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character10"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -576,7 +539,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character11"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -586,7 +549,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character12"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -596,7 +559,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character13"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -606,7 +569,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character14"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -616,7 +579,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character15"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -626,7 +589,7 @@ scale = Vector2(0.3, 0.3)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character16"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -636,7 +599,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character17"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -646,7 +609,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character18"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -656,7 +619,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character19"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -666,7 +629,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character20"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -675,7 +638,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character21"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -684,7 +647,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character22"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -693,7 +656,7 @@ position = Vector2(500, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character23"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -702,7 +665,7 @@ position = Vector2(-185.4, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character24"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -712,7 +675,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character25"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -722,7 +685,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character26"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -732,7 +695,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character27"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -741,7 +704,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character28"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -750,7 +713,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character29"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -759,7 +722,7 @@ position = Vector2(500, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character30"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -768,7 +731,7 @@ position = Vector2(-185.4, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character31"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -778,7 +741,7 @@ scale = Vector2(0.3, 0.3)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character32"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -788,7 +751,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character33"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -798,7 +761,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character34"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -808,7 +771,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character35"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -818,7 +781,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character36"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -828,7 +791,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character37"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -838,7 +801,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character38"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -848,7 +811,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character39"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -858,7 +821,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character40"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -868,7 +831,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character41"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -878,7 +841,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character42"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -888,7 +851,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character43"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -898,7 +861,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character44"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -908,7 +871,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character45"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -918,7 +881,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character46"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -928,7 +891,7 @@ scale = Vector2(0.3, 0.3)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character47"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -938,7 +901,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character48"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -948,7 +911,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character49"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -958,7 +921,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character50"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -968,7 +931,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character51"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -977,7 +940,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character52"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -986,7 +949,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character53"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -995,7 +958,7 @@ position = Vector2(500, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character54"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -1004,7 +967,7 @@ position = Vector2(-185.4, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character55"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -1014,7 +977,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character56"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -1024,7 +987,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character57"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -1034,7 +997,7 @@ scale = Vector2(2, 2)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character58"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -1043,7 +1006,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character59"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_g4a3a")
 script = ExtResource("2_oe8ih")
 
@@ -1052,7 +1015,7 @@ position = Vector2(-345, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character60"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("30_jypll")
 script = ExtResource("2_oe8ih")
 
@@ -1061,7 +1024,7 @@ position = Vector2(500, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character61"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("31_i1kvf")
 script = ExtResource("2_oe8ih")
 
@@ -1070,7 +1033,7 @@ position = Vector2(-185.4, -245)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Node/Character62"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 texture = ExtResource("32_h2b7s")
 script = ExtResource("2_oe8ih")
 
@@ -1079,13 +1042,114 @@ position = Vector2(1084.11, -312.72)
 script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Waldo"]
-material = SubResource("ShaderMaterial_h2b7s")
+material = ExtResource("3_smepj")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("35_i1kvf")
 script = ExtResource("2_oe8ih")
 
 [node name="Waldo" type="Node2D" parent="Waldo"]
 script = ExtResource("36_h2b7s")
+
+[node name="10" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("45_32jyh")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 100.0
+background = true
+
+[node name="9" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("44_21722")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 90.0
+background = true
+
+[node name="8" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("43_le6kb")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 80.0
+background = true
+
+[node name="7" type="Sprite2D" parent="."]
+z_index = -200
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("42_vbdwp")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 70.0
+background = true
+
+[node name="6" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("41_4xxsf")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 60.0
+background = true
+
+[node name="5" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.06522)
+texture = ExtResource("40_i5xiv")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 50.0
+background = true
+
+[node name="4" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("39_bcr21")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 40.0
+background = true
+
+[node name="3" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("38_p35s3")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 30.0
+background = true
+
+[node name="2" type="Sprite2D" parent="."]
+z_index = -300
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.117)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("37_gn87n")
+script = ExtResource("2_oe8ih")
+distance_from_camera = 20.0
+background = true
+
+[node name="1" type="Sprite2D" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_vrp3b")
+position = Vector2(1153.94, -14.1174)
+scale = Vector2(1.073, 1.073)
+texture = ExtResource("36_ooaiw")
+script = ExtResource("2_oe8ih")
+background = true
 
 [connection signal="timeout" from="Camera/Timer" to="Camera/Timer" method="_on_timeout"]
 [connection signal="value_changed" from="HUD/Control/HSlider" to="HUD/Control/HSlider" method="_on_value_changed"]

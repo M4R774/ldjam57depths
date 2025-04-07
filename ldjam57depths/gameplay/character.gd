@@ -5,7 +5,7 @@ var area_rect: Rect2 = Rect2(Vector2(-350, -550), Vector2(3200, 1200))
 
 # Liikkumiseen liittyvät muuttujat
 var target_pos: Vector2
-var speed: float = 50.0  # Liikkumisnopeus
+var speed: float = 25.0  # Liikkumisnopeus
 
 # Syvyysanimaation parametrit: suurempi skaala alhaalla ruudulla
 var max_scale: float = 2.0  # Isin skaala, kun hahmo on ruudun alareunassa

@@ -12,14 +12,14 @@ func _ready() -> void:
 	SIGNAL_BUS.add_score.connect(_on_add_score)
 
 
-func _on_add_score(points: int) -> void:
+func _on_add_score(points: int, _noise: float) -> void:
 	score += points
 
 
 func _on_game_over(reason) -> void:
 	visible = true
 
-	$Label.text = "%s\nSCORE: %s\nTHANKS FOR PLAYING" % [reason, score]
+	$Label.text = "%s\nSCORE: %s\n" % [reason, score]
 	# YOU RAN OUT OF BATTERY  /  YOU TOOK A BAD PICTURE
 	# SCORE: 123123123
 	# THANKS FOR PLAYING

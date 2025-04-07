@@ -9,19 +9,9 @@ func _on_picture_taken():
 	var picture_noise = $"../Sprite".material.get_shader_parameter("strength")
 	var points = get_exponential_points(picture_noise)
 	print("POINTS: ", points)
-	SIGNAL_BUS.add_score.emit(points)
+	SIGNAL_BUS.add_score.emit(points, picture_noise)
 	if picture_noise > 40:
 		SIGNAL_BUS.game_over.emit("YOU TOOK A BAD PICTURE")
-	elif picture_noise > 30:
-		print("BAD PICTURE: ", picture_noise)
-	elif picture_noise > 20:
-		print("NOT TERRIBLE PICTURE: ", picture_noise)
-	elif picture_noise > 10:
-		print("OK PICTURE: ", picture_noise)
-	elif picture_noise > 5:
-		print("GOOD PICTURE: ", picture_noise)
-	else:
-		print("EXCELLENT PICTURE: ", picture_noise)
 
 
 func get_exponential_points(rating: int, max_points: int = 10000, alpha: float = .4) -> int:

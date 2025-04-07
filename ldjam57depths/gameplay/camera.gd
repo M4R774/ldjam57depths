@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var zoom_speed := 0.02
+@export var zoom_speed := 0.01
 @export var min_zoom := 1.0
 @export var max_zoom := 4.0
 @export var game_area: Area2D
