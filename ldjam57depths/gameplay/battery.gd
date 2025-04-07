@@ -7,7 +7,7 @@ func _ready():
 
 func _on_picture_taken():
     pass
-    var battery_consume = randf_range(9.0, 11.0)
+    var battery_consume = randf_range(15.0, 20.0)
     reduce_battery(battery_consume)
 
 

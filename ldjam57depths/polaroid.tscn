@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://crccjndswmfvt"]
+
+[ext_resource type="Texture2D" uid="uid://bfyjd58qbv2na" path="res://main_menu/background.jpg" id="1_8hsta"]
+
+[node name="Picture" type="TextureRect"]
+size_flags_horizontal = 6
+texture = ExtResource("1_8hsta")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 128.0
+offset_bottom = 134.0
+text = "GREAT!"
+horizontal_alignment = 1

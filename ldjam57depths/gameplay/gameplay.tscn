@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=71 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://ce46nsw3qlfdi" path="res://3.png" id="39_bcr21"]
 [ext_resource type="Texture2D" uid="uid://g6pbhfla37b8" path="res://4.png" id="40_i5xiv"]
 [ext_resource type="Texture2D" uid="uid://bvqmsehhibh1g" path="res://5.png" id="41_4xxsf"]
+[ext_resource type="PackedScene" uid="uid://crccjndswmfvt" path="res://polaroid.tscn" id="42_oltbr"]
 [ext_resource type="Texture2D" uid="uid://bbsotnml2uwsq" path="res://6.png" id="42_vbdwp"]
 [ext_resource type="Texture2D" uid="uid://ce8a2fwp88h7m" path="res://7.png" id="43_le6kb"]
 [ext_resource type="Texture2D" uid="uid://s36cxmwjnhhf" path="res://8.png" id="44_21722"]
@@ -420,7 +421,6 @@ script = ExtResource("17_q2ml8")
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOver" type="ColorRect" parent="HUD/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,6 +429,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.815686)
 script = ExtResource("19_2qs7h")
+polaroid_scene = ExtResource("42_oltbr")
 
 [node name="Label" type="Label" parent="HUD/Control/GameOver"]
 layout_mode = 1
@@ -442,7 +443,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 64
 text = "GAME OVER
-
 SCORE: 312312.3123"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -461,6 +461,21 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 41
 text = "Main menu"
 script = ExtResource("20_wxx72")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/GameOver"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 42.0
+offset_top = 79.0
+offset_right = -39.0
+offset_bottom = 168.0
+grow_horizontal = 2
+theme_override_constants/separation = 5
+
+[node name="Picture" parent="HUD/Control/GameOver/HBoxContainer" instance=ExtResource("42_oltbr")]
+visible = false
+layout_mode = 2
 
 [node name="Node" type="Node" parent="."]
 
