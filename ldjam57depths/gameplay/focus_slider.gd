@@ -27,6 +27,11 @@ func _on_value_changed(new_focus:float) -> void:
 
 
 func play_audio(new_focus) -> void:
+    var zoom_str = "%.1fx" % %Camera.zoom.x
+    var focus_str = "%2dm" % new_focus
+    var formatted_text = "%-10s%50s" % [zoom_str, focus_str]
+    $Label.text = formatted_text
+
     if !focus_audio.playing and new_focus != old_focus_distance:
         if new_focus > old_focus_distance:
             focus_audio.stream = focus_in_sound

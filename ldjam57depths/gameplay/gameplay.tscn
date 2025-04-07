@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://ddgl5xndcbusb"]
+[gd_scene load_steps=70 format=3 uid="uid://ddgl5xndcbusb"]
 
 [ext_resource type="Script" uid="uid://crnybttakkvko" path="res://gameplay/camera.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://7a1n5nxpi10g" path="res://gameplay/gameplay.gd" id="1_fbudy"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" uid="uid://bpw0m53uv36os" path="res://gameplay/to_main_menu.gd" id="20_wxx72"]
 [ext_resource type="AudioStream" uid="uid://dd56fj2uc6t18" path="res://voicelines/02.mp3" id="21_w8tx5"]
 [ext_resource type="AudioStream" uid="uid://dy1iwpsdaa1d3" path="res://voicelines/03.mp3" id="22_4s6n4"]
+[ext_resource type="Texture2D" uid="uid://7on6nkuvmp7u" path="res://gameplay/pallura.png" id="25_ui6ly"]
 [ext_resource type="Script" uid="uid://dykracabta5nl" path="res://gameplay/character.gd" id="28_ni0ts"]
 [ext_resource type="Texture2D" uid="uid://ceddcvk82jvi" path="res://characters/red.png" id="30_g4a3a"]
 [ext_resource type="Texture2D" uid="uid://c3uig3p5c0sng" path="res://characters/yellow.png" id="30_jypll"]
@@ -190,7 +191,6 @@ bad_picture_sounds = Array[AudioStream]([ExtResource("16_aok6h"), ExtResource("1
 terrible_picture_sounds = Array[AudioStream]([ExtResource("20_fglxu"), ExtResource("21_w8tx5"), ExtResource("22_4s6n4")])
 
 [node name="HUD" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("3_n6aft")
 
 [node name="Control" type="Control" parent="HUD"]
@@ -233,13 +233,15 @@ color = Color(0, 0, 0, 1)
 [node name="HSlider" type="HSlider" parent="HUD/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0494792
-anchor_top = 0.78858
-anchor_right = 0.950521
-anchor_bottom = 0.820988
+anchor_left = 0.251736
+anchor_top = 0.837963
+anchor_right = 0.747396
+anchor_bottom = 0.891975
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/grabber_offset = 6
+theme_override_icons/grabber = ExtResource("25_ui6ly")
 value = 10.0
 script = ExtResource("3_xuee5")
 focus_in_sound = ExtResource("4_smepj")
@@ -254,6 +256,18 @@ process_mode = 3
 stream = ExtResource("6_2em84")
 volume_db = 20.0
 script = ExtResource("7_0kugc")
+
+[node name="Label" type="Label" parent="HUD/Control/HSlider"]
+layout_mode = 0
+offset_top = 22.0
+offset_right = 569.0
+offset_bottom = 69.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
+text = "0.5x                                              19m"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HUD/Control"]
 layout_mode = 1
@@ -275,6 +289,8 @@ offset_top = -82.0
 offset_right = 165.0
 offset_bottom = -51.0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "60 FPS"
 script = ExtResource("8_eglai")
@@ -289,6 +305,8 @@ offset_top = -587.0
 offset_right = 981.0
 offset_bottom = -556.0
 grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "00:16:08:00"
 script = ExtResource("9_m1ld8")
@@ -317,6 +335,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 text = "99 %"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -337,6 +357,8 @@ offset_left = 968.0
 offset_top = 124.0
 offset_right = 1075.0
 offset_bottom = 162.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "3840x2160"
 horizontal_alignment = 2
@@ -348,6 +370,8 @@ offset_left = 862.0
 offset_top = 563.0
 offset_right = 966.0
 offset_bottom = 593.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "9001"
 horizontal_alignment = 2
@@ -359,6 +383,7 @@ offset_left = 976.0
 offset_top = 558.0
 offset_right = 1080.0
 offset_bottom = 596.0
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 21
 text = "MENU ☰"
 script = ExtResource("15_yr68n")
@@ -374,6 +399,8 @@ mouse_filter = 2
 
 [node name="Help" type="Label" parent="HUD/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 29
 text = "
 Scrollwheel for Zoom + Focus"
@@ -383,6 +410,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Help2" type="Label" parent="HUD/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 29
 text = "
 Left click to take picture"
@@ -409,6 +438,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 64
 text = "GAME OVER
 
