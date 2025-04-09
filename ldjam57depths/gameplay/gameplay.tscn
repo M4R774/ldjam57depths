@@ -1089,7 +1089,6 @@ script = ExtResource("28_ni0ts")
 
 [node name="Sprite" type="Sprite2D" parent="Waldo"]
 material = ExtResource("3_smepj")
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("35_i1kvf")
 script = ExtResource("2_oe8ih")
 
